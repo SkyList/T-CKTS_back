@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "events",
   "info": {
-    "name": "Event"
+    "name": "Event",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -28,6 +29,13 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "location": {
+      "type": "json"
+    },
+    "presentations": {
+      "via": "event",
+      "collection": "presentation"
     }
   }
 }

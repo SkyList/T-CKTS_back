@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sectors",
+  "info": {
+    "name": "sector"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "max_capacity": {
+      "type": "biginteger"
+    },
+    "available_capacity": {
+      "type": "biginteger"
+    },
+    "presentation": {
+      "model": "presentation",
+      "via": "sectors"
+    }
+  }
+}

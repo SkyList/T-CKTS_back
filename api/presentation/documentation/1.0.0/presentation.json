@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/events": {
+    "/presentations": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Event"
+                    "$ref": "#/components/schemas/Presentation"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Event"
+          "Presentation"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Event"
+                  "$ref": "#/components/schemas/Presentation"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Event"
+          "Presentation"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewEvent"
+                "$ref": "#/components/schemas/NewPresentation"
               }
             }
           }
         }
       }
     },
-    "/events/count": {
+    "/presentations/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Event"
+          "Presentation"
         ],
         "parameters": []
       }
     },
-    "/events/{id}": {
+    "/presentations/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Event"
+                  "$ref": "#/components/schemas/Presentation"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Event"
+          "Presentation"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Event"
+                  "$ref": "#/components/schemas/Presentation"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Event"
+          "Presentation"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewEvent"
+                "$ref": "#/components/schemas/NewPresentation"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Event"
+          "Presentation"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Event": {
+      "Presentation": {
         "required": [
           "id"
         ],
@@ -522,21 +522,19 @@
           "id": {
             "type": "string"
           },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
-          },
-          "banner": {
+          "event": {
             "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
+              "id"
             ],
             "properties": {
               "id": {
@@ -545,46 +543,22 @@
               "name": {
                 "type": "string"
               },
-              "alternativeText": {
+              "description": {
                 "type": "string"
               },
-              "caption": {
+              "banner": {
                 "type": "string"
               },
-              "width": {
-                "type": "integer"
-              },
-              "height": {
-                "type": "integer"
-              },
-              "formats": {
+              "location": {
                 "type": "object"
               },
-              "hash": {
-                "type": "string"
+              "presentations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "number"
-              },
-              "url": {
-                "type": "string"
-              },
-              "previewUrl": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
+              "published_at": {
                 "type": "string"
               },
               "created_by": {
@@ -595,10 +569,7 @@
               }
             }
           },
-          "location": {
-            "type": "object"
-          },
-          "presentations": {
+          "sectors": {
             "type": "array",
             "items": {
               "required": [
@@ -608,23 +579,20 @@
                 "id": {
                   "type": "string"
                 },
-                "date": {
-                  "type": "string"
-                },
-                "time": {
-                  "type": "string"
-                },
                 "name": {
                   "type": "string"
                 },
-                "event": {
-                  "type": "string"
+                "price": {
+                  "type": "number"
                 },
-                "sectors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "max_capacity": {
+                  "type": "integer"
+                },
+                "available_capacity": {
+                  "type": "integer"
+                },
+                "presentation": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -644,18 +612,22 @@
           }
         }
       },
-      "NewEvent": {
+      "NewPresentation": {
         "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
-          "description": {
+          "event": {
             "type": "string"
           },
-          "location": {
-            "type": "object"
-          },
-          "presentations": {
+          "sectors": {
             "type": "array",
             "items": {
               "type": "string"
@@ -677,7 +649,7 @@
   },
   "tags": [
     {
-      "name": "Event"
+      "name": "Presentation"
     }
   ]
 }
